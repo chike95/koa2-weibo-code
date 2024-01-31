@@ -10,13 +10,21 @@ const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const { REDIS_CONF } = require('./conf/db')
 
+const { isProd, isTest } = require('./utils/env')
+
 // 路由
 const index = require('./routes/index')
 const users = require('./routes/users')
 const errorViewRouter = require('./routes/view/error')
 
-// error handler
-onerror(app)
+// error handle
+let onerrorConf = {}
+if (isProd) {
+  onerrorConf.redirect = '/error'
+}
+onerror(app, onerrorConf)
+
+
 
 // middlewares
 app.use(bodyparser({
