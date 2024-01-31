@@ -10,8 +10,10 @@ const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const { REDIS_CONF } = require('./conf/db')
 
+// 路由
 const index = require('./routes/index')
 const users = require('./routes/users')
+const errorViewRouter = require('./routes/view/error')
 
 // error handler
 onerror(app)
@@ -27,6 +29,7 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
+
 
 // 3-5 session 配置
 app.keys = ['UIsdf-7878￥@%']; // 设置session的密钥，用于加密session数据。
@@ -56,6 +59,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404 路由注册到最下面
 
 // error-handling
 app.on('error', (err, ctx) => {
