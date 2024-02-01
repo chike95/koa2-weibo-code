@@ -22,7 +22,7 @@ router.get('/', async (ctx, next) => {
 
 
 router.get('/json', async (ctx, next) => {
-  throw Error('something error');
+  // throw Error('something error');
   const session = ctx.session
   if (session.viewNum == null) {
     session.viewNum = 0
