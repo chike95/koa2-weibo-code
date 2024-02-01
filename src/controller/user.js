@@ -4,9 +4,10 @@
  */
 
 const { SuccessModel, ErrorModel } = require("../model/ResModel")
-const { getUserInfo } = require("../services/user")
+const { getUserInfo, createUser } = require("../services/user")
 const {
-    registerUserNameNotExistInfo
+    registerUserNameNotExistInfo,
+    registerUserNameExistInfo
 } = require('../model/ErrorInfo')
 
 /**
@@ -32,6 +33,36 @@ async function isExist(userName) {
     // 统一返回格式
 }
 
+/**
+ * 
+ * @param {string} userName 用户名
+ * @param {string} password 密码 
+ * @param {number} gender   性别（1男，2女，3苞米）
+ */
+async function register({ userName, password, gender }) {
+    const userInfo = await getUserInfo(userName)
+
+    // 用户名已存在
+    if (userInfo) {
+        return ErrorModel(registerUserNameExistInfo)
+    }
+
+    // 注册 service
+    try {
+        await createUser({
+            userName,
+            password,
+            gender
+        })
+        return new SuccessModel()
+    } catch (ex) {
+        console.log(ex.message, ex.stack);
+        return new ErrorModel(registerFailInfo)
+    }
+}
+
+
 module.exports = {
-    isExist
+    isExist,
+    register
 }
