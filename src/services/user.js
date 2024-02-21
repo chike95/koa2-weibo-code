@@ -13,7 +13,7 @@ const { formatUser } = require('./_format')
  */
 async function getUserInfo(userName, password) {
     // 查询条件
-    const whereOpt = {
+    let whereOpt = {
         userName
     }
     if (password) {
