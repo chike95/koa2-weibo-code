@@ -48,7 +48,7 @@ async function register({ userName, password, gender }) {
     try {
         await createUser({
             userName,
-            password: doCrypto(password),
+            password,
             gender
         })
         return new SuccessModel()
@@ -59,14 +59,14 @@ async function register({ userName, password, gender }) {
 }
 
 /**
- * 
+ * 登录用户
  * @param {Object} ctx koa ctx上下文
  * @param {string} userName 用户名
  * @param {string} password 密码
  */
 async function login(ctx, userName, password) {
     // 获取用户信息
-    const userInfo = await getUserInfo(userName, doCrypto(password))
+    const userInfo = await getUserInfo(userName, password)
     // 登录失败
     if (!userInfo) {
         return new ErrorModel(loginFailInfo)
@@ -76,7 +76,7 @@ async function login(ctx, userName, password) {
     if (ctx.session.userInfo == null) {
         ctx.session.userInfo = userInfo
     }
-    return new SuccessModel()
+    return new SuccessModel(ctx.session.userInfo)
 }
 
 

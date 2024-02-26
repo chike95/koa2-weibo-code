@@ -1,3 +1,5 @@
 index2
-<%= userInfo.userName %>
-<img style="width: 60px; height: 60px;" src="<%= userInfo.picture %>" alt="">
+<% if (userInfo){ %>
+    <%= userInfo.userName %>
+    <img style="width: 60px; height: 60px;" src="<%= userInfo.picture %>" alt="">
+<% } %>
