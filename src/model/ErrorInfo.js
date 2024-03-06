@@ -30,4 +30,18 @@ module.exports = {
         message: '您尚未登录'
     },
     // 修改密码失败
+    changePasswordFailInfo: {
+        errno: 10006,
+        message: '修改密码失败，请重试'
+    },
+    // 上传文件过大
+    uploadFileSizeFailInfo: {
+        errno: 10007,
+        message: '文件大小超出限制'
+    },
+    // 修改基本信息失败
+    changeInfoFailInfo: {
+        errno: 10008,
+        message: '修改基本信息失败，请重试'
+    }
 }
