@@ -4,7 +4,7 @@
  */
 
 const router = require('koa-router')()
-const { isExist, register, login, changeInfo } = require('../../controller/user')
+const { isExist, register, login, changeInfo, changePassword } = require('../../controller/user')
 const { loginCheck } = require('../../middlewares/loginChecks')
 
 router.prefix('/api/user')
@@ -37,5 +37,15 @@ router.patch('/changeInfo', loginCheck, async (ctx, next) => {
     // controller
     ctx.body = await changeInfo(ctx, { nickName, city, picture })
 })
+
+// 修改密码
+router.patch('/changePassword', loginCheck, async (ctx, next) => {
+    // 获取参数
+    const { password, newPassword } = ctx.request.body
+    const { userName } = ctx.session.userInfo
+    // controller
+    ctx.body = await changePassword(userName, password, newPassword)
+})
+
 
 module.exports = router
