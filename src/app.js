@@ -17,6 +17,7 @@ const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
 const userApiRouter = require('./routes/api/user')
+const blogViewRouter = require('./routes/view/blog')
 const errorViewRouter = require('./routes/view/error')
 
 // error handle
@@ -67,9 +68,10 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+// app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404 路由注册到最下面
 
 // error-handling
