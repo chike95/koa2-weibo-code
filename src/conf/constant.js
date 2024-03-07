@@ -5,4 +5,5 @@
 
 module.exports = {
     DEFAULT_PICTRUE: 'https://dwz.cn/rnTnftZs',
+    PAGE_SIZE: 5,
 }

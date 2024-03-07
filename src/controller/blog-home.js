@@ -12,7 +12,7 @@ const { createBlogFailInfo } = require('../model/ErrorInfo')
  * @param {Object} param0 创建微博所需的数据{userId, content, image}
  */
 async function create({ userId, content, image }) {
-    // service
+    // service 
     try {
         // 创建微博
         const blog = await createBlog({
