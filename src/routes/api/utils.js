@@ -14,6 +14,9 @@ router.prefix('/api/utils')
 router.post('/upload', loginCheck, koaForm(), async (ctx, next) => {
     // 调用上传图片的函数
     const file = ctx.req.files['file']
+    if (!file) {
+        return ctx.body = '上传失败'
+    }
     // 保存文件
     const { size, path, name, type } = file
     // controller
