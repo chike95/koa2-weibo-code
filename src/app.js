@@ -17,10 +17,12 @@ const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
 // 路由
 const index = require('./routes/index')
+const homeApiRouter = require('./routes/api/blog-home')
 const utilsApiRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
 const userApiRouter = require('./routes/api/user')
 const blogViewRouter = require('./routes/view/blog')
+
 const errorViewRouter = require('./routes/view/error')
 
 // error handle
@@ -73,6 +75,7 @@ app.use(async (ctx, next) => {
 
 // routes
 // app.use(index.routes(), index.allowedMethods())
+app.use(homeApiRouter.routes(), homeApiRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())

@@ -43,5 +43,27 @@ module.exports = {
     changeInfoFailInfo: {
         errno: 10008,
         message: '修改基本信息失败，请重试'
+    },
+    // 删除用户失败
+    deleteUserFailInfo: {
+        errno: 100010,
+        message: '删除用户失败，请重试'
+    },
+    // 添加关注失败
+    addFollowerFailInfo: {
+        errno: 100011,
+        message: '添加关注失败，请重试'
+    },
+    // 取消关注失败
+    deleteFollowerFailInfo: {
+        errno: 100012,
+        message: '取消关注失败，请重试'
+    },
+    // 创建微博失败
+    createBlogFailInfo: {
+        errno: 100013,
+        message: '创建微博失败，请重试'
     }
+
+
 }
