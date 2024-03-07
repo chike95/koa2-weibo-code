@@ -3,6 +3,7 @@
  * @author 夜枫林
  */
 
+const xss = require('xss')
 const { createBlog } = require('../services/blog')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { createBlogFailInfo } = require('../model/ErrorInfo')
@@ -14,7 +15,11 @@ async function create({ userId, content, image }) {
     // service
     try {
         // 创建微博
-        const blog = await createBlog({ userId, content, image })
+        const blog = await createBlog({
+            userId,
+            content: xss(content),
+            image
+        })
         return new SuccessModel({ blog })
     } catch (ex) {
         console.error(ex.message, ex.stack)
